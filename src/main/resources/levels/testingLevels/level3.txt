@@ -1,0 +1,5 @@
+4 4
+RGBR
+RGBR
+RGBR
+RGBR

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.scene.image.ImageView?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TutorialController">
+    <children>
+        <Text layoutX="300.0" layoutY="70.0" text="Tutorial">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Text>
+        <ImageView fx:id="difficulties" layoutX="150" layoutY="80" />
+        <Text layoutX="70.0" layoutY="300.0" text="First, pick what difficulty level you want to play. For this tutorial we will use the easy difficulty.">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+        <ImageView fx:id="shoot" layoutX="50" layoutY="320" fitHeight="300" fitWidth="300"/>
+        <ImageView fx:id="destroy" layoutX="370" layoutY="320" fitHeight="300" fitWidth="300"/>
+        <Text layoutX="50" layoutY="650" text="Point your mouse to aim. Click to shoot a bubble. When the bubble does not hit two or more" >
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+        <Text layoutX="50" layoutY="670" text="bubbles of the same color the bubble sticks to the bubble it hits, like on the left." >
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+        <Text layoutX="50" layoutY="690" text="When the bubble hits two or more bubbles of the same color the bubbles disappear and " >
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+        <Text layoutX="50" layoutY="710" text="your score goes up, like on the right. You win when only the grey center bubble is left." >
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+        <Text layoutX="50" layoutY="730" text="Make sure the bubbles don't hit the wall, if this happens you lose!" >
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Text>
+        <Button layoutX="600.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleMenuButtonAction"  prefHeight="58.0" prefWidth="83.0" text="Menu" />
+    </children>
+
+</AnchorPane>

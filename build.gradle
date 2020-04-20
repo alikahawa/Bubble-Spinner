@@ -1,0 +1,103 @@
+import com.github.spotbugs.SpotBugsTask
+
+plugins {
+    id 'java'
+//    id 'eclipse' // optional (to generate Eclipse project files)
+//    id 'idea' // optional (to generate IntelliJ IDEA project files)
+    id 'application'
+
+    // Test coverage
+    id 'jacoco'
+
+    // Code style
+    id 'checkstyle'
+
+    // PMD
+    id 'pmd'
+
+    // FindBugs / SpotBugs
+    id "com.github.spotbugs" version "2.0.1"
+
+    // OpenFX
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+
+
+}
+
+group 'nl.tudelft.cse.sem.template'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 12
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+
+    jacoco {
+        enabled = true
+        includes = ['*']
+        excludes = ['gui/**',
+                    'auth/Serialize.java']
+        //serialize is excluded because the class is not currently in use.
+    }
+}
+
+dependencies {
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.5.2'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+    testCompile 'org.mockito:mockito-core:2.7.22'
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true
+            element = 'CLASS'
+            excludes = ['main/gui/**']
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 400
+            }
+        }
+    }
+}
+
+checkstyle {
+    toolVersion "8.25"
+    maxWarnings = 0
+    ignoreFailures = false
+	configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+}
+
+pmd {
+    incrementalAnalysis = true
+}
+
+spotbugs {
+    sourceSets = [sourceSets.main]
+    ignoreFailures = false
+    effort = "default"
+    reportLevel = "high"
+    visitors = ["FindSqlInjection", "SwitchFallthrough"]
+    excludeFilter = file("$rootProject.projectDir/config/spotbugs/excludeFilter.xml")
+}
+
+javafx {
+    version = '13'
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+mainClassName = "gui/Main"
+
+tasks.withType(SpotBugsTask) {
+    reports.xml.enabled = false
+    reports.html.enabled = true
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
