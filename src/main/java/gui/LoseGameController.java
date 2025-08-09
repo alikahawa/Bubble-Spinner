@@ -1,4 +1,5 @@
 package gui;
+import gui.SceneLoader;
 
 import game.ScoreCalculator;
 import grid.Grid;
@@ -17,12 +18,18 @@ public class LoseGameController {
     @FXML
     private transient Text score;
 
-    private transient ScoreCalculator calculator = new ScoreCalculator(Main.player, 0);
+    private transient ScoreCalculator calculator;
 
 
     @FXML
     public void initialize() {
-        score.setText("Your score: " + calculator.getScore());
+        // Initialize calculator when needed
+        if (calculator == null && Main.player != null) {
+            calculator = new ScoreCalculator(Main.player, 0);
+        }
+        if (calculator != null) {
+            score.setText("Your score: " + calculator.getScore());
+        }
     }
 
     /**

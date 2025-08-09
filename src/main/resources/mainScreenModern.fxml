@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+  Modern Main Screen for Bubble-Spinner Game
+  
+  This FXML file defines the modernized main menu interface with improved
+  visual hierarchy, better spacing, and professional styling.
+  
+  Author: Ali Kahawati (Modernization Update) 
+  Date: August 2025
+  Version: 2.0
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1" 
+           xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="gui.MainScreenController"
+           styleClass="main-screen">
+    
+    <!-- Background Gradient Layer -->
+    <AnchorPane styleClass="main-window">
+        
+        <!-- Main Content Container with Card Design -->
+        <VBox alignment="CENTER" spacing="32" styleClass="content-container"
+              AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50"
+              AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
+            
+            <!-- Game Title Section -->
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="BUBBLE SPINNER" styleClass="title-large">
+                    <font>
+                        <Font name="System Bold" size="42.0" />
+                    </font>
+                </Label>
+                <Label text="Professional Edition" styleClass="caption-text">
+                    <font>
+                        <Font name="System Italic" size="14.0" />
+                    </font>
+                </Label>
+            </VBox>
+            
+            <!-- Main Action Buttons -->
+            <VBox alignment="CENTER" spacing="20">
+                
+                <!-- Play Button - Primary Action -->
+                <Button fx:id="playButton" 
+                        text="PLAY GAME" 
+                        styleClass="btn-play, scale-on-hover"
+                        onAction="#handlePlayButtonAction" 
+                        prefWidth="240" 
+                        prefHeight="60">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Button>
+                
+                <!-- Secondary Action Buttons Grid -->
+                <HBox alignment="CENTER" spacing="16">
+                    
+                    <!-- Profile Button -->
+                    <Button fx:id="profileButton" 
+                            text="Profile" 
+                            styleClass="btn-secondary"
+                            onAction="#handleProfileButtonAction" 
+                            prefWidth="110" 
+                            prefHeight="45">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                    
+                    <!-- Tutorial Button -->
+                    <Button fx:id="tutorialButton" 
+                            text="Tutorial" 
+                            styleClass="btn-secondary"
+                            onAction="#handleTutorialButtonAction" 
+                            prefWidth="110" 
+                            prefHeight="45">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                    
+                    <!-- Scoreboard Button -->
+                    <Button fx:id="scoreboardButton" 
+                            text="Scoreboard" 
+                            styleClass="btn-secondary"
+                            onAction="#handleScoreboardButtonAction" 
+                            prefWidth="110" 
+                            prefHeight="45">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Button>
+                    
+                </HBox>
+                
+            </VBox>
+            
+            <!-- Player Information Card (Optional) -->
+            <HBox alignment="CENTER" styleClass="glass-panel" spacing="12">
+                <padding>
+                    <Insets top="12" right="16" bottom="12" left="16" />
+                </padding>
+                
+                <Label text="Welcome back, " styleClass="body-text">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                
+                <Label fx:id="playerNameLabel" text="Player" styleClass="body-text">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                
+            </HBox>
+            
+        </VBox>
+        
+        <!-- Exit Button - Top Right Corner -->
+        <Button fx:id="exitButton" 
+                text="✕" 
+                styleClass="btn-small"
+                onAction="#handleExitButtonAction" 
+                prefWidth="40" 
+                prefHeight="40"
+                AnchorPane.topAnchor="16" 
+                AnchorPane.rightAnchor="16">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Button>
+        
+        <!-- Version Information - Bottom Right -->
+        <Label text="v2.0 - Professional Edition" 
+               styleClass="caption-text"
+               AnchorPane.bottomAnchor="16" 
+               AnchorPane.rightAnchor="16">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+        
+    </AnchorPane>
+    
+</StackPane>

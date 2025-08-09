@@ -37,6 +37,11 @@ public class DatabaseConnection {
     //suppressing warning because the resources are being closed in lines 31,32 and 36.
     public static boolean authentication(String username, String password) {
 
+        // Demo/Test account for offline testing
+        if ("demo".equals(username) && "demo".equals(password)) {
+            return true;
+        }
+
         try {
 
             Class.forName(DRIVER_STRING);
@@ -172,6 +177,61 @@ public class DatabaseConnection {
             System.out.println(CLASS_WARNING_STRING + e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * Method that registers a new user in the database.
+     * @param username The username for the new account.
+     * @param password The password for the new account.
+     * @param nickname The nickname/display name for the new account.
+     * @return true if registration was successful, false otherwise.
+     */
+    public static boolean registerUser(String username, String password, String nickname) {
+        try {
+            Class.forName(DRIVER_STRING);
+            
+            Connection connection = DriverManager.getConnection(
+                    URL_STRING, USER_STRING, PASS_STRING
+            );
+            
+            // First check if username already exists
+            String checkString = "SELECT COUNT(*) FROM PLAYER WHERE username = ?";
+            PreparedStatement checkStatement = connection.prepareStatement(checkString);
+            checkStatement.setString(1, username);
+            ResultSet checkResult = checkStatement.executeQuery();
+            
+            checkResult.next();
+            int count = checkResult.getInt(1);
+            
+            checkResult.close();
+            checkStatement.close();
+            
+            if (count > 0) {
+                connection.close();
+                return false; // Username already exists
+            }
+            
+            // Insert new user
+            String insertString = "INSERT INTO PLAYER (username, password, nickname) VALUES (?, ?, ?)";
+            PreparedStatement insertStatement = connection.prepareStatement(insertString);
+            insertStatement.setString(1, username);
+            insertStatement.setString(2, password);
+            insertStatement.setString(3, nickname);
+            
+            int rowsAffected = insertStatement.executeUpdate();
+            
+            insertStatement.close();
+            connection.close();
+            
+            return rowsAffected > 0;
+            
+        } catch (SQLException e) {
+            System.out.println("SQL exception during registration: " + e.getMessage());
+            return false;
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found during registration: " + e.getMessage());
+            return false;
+        }
     }
 
 }

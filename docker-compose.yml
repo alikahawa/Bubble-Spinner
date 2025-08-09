@@ -1,0 +1,80 @@
+# ================================================
+# Bubble-Spinner Database Docker Compose
+# ================================================
+# This Docker Compose file sets up a local MariaDB instance
+# for development and testing of the Bubble-Spinner game
+# 
+# Usage:
+#   docker-compose up -d        # Start database
+#   docker-compose down         # Stop database
+#   docker-compose logs         # View logs
+# ================================================
+
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: bubble_spinner_db
+    restart: unless-stopped
+    
+    # Environment variables
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_2025
+      MYSQL_DATABASE: SEM
+      MYSQL_USER: bubble_spinner
+      MYSQL_PASSWORD: bubble_game_2025!
+    
+    # Port mapping
+    ports:
+      - "3306:3306"
+    
+    # Volume for persistent data
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./database_setup.sql:/docker-entrypoint-initdb.d/database_setup.sql:ro
+      - ./mariadb_config:/etc/mysql/conf.d:ro
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+      interval: 30s
+      start_period: 40s
+    
+    # Network
+    networks:
+      - bubble_spinner_net
+
+  # Optional: phpMyAdmin for database management
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: bubble_spinner_phpmyadmin
+    restart: unless-stopped
+    
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_USER: bubble_spinner
+      PMA_PASSWORD: bubble_game_2025!
+    
+    ports:
+      - "8080:80"
+    
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    
+    networks:
+      - bubble_spinner_net
+
+# Volumes
+volumes:
+  mariadb_data:
+    driver: local
+
+# Networks
+networks:
+  bubble_spinner_net:
+    driver: bridge

@@ -1,4 +1,5 @@
 package gui;
+import gui.SceneLoader;
 
 import auth.DatabaseConnection;
 import game.ScoreEntry;

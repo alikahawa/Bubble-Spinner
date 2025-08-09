@@ -1,4 +1,5 @@
 package gui;
+import gui.SceneLoader;
 
 import auth.DatabaseConnection;
 import javafx.event.ActionEvent;
@@ -36,10 +37,22 @@ public class ProfileController {
      */
     @FXML
     public void initialize() {
-        username.setText("Username: " + Main.player.getUsername());
-        nickname.setText("Nickname: " + Main.player.getNickname());
-        score.setText("Top Score: "
-                + DatabaseConnection.retrieveMaxScoreOfPlayer(Main.player.getUsername()));
+        if (Main.player != null) {
+            username.setText("Username: " + Main.player.getUsername());
+            nickname.setText("Nickname: " + Main.player.getNickname());
+            
+            // For guests, don't try to retrieve scores from database
+            if (!"Guest".equals(Main.player.getUsername())) {
+                score.setText("Top Score: "
+                        + DatabaseConnection.retrieveMaxScoreOfPlayer(Main.player.getUsername()));
+            } else {
+                score.setText("Top Score: Guest Mode - No Score Tracking");
+            }
+        } else {
+            username.setText("Username: Not logged in");
+            nickname.setText("Nickname: N/A");
+            score.setText("Top Score: N/A");
+        }
     }
 
 

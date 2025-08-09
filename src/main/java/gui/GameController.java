@@ -1,4 +1,5 @@
 package gui;
+import gui.SceneLoader;
 
 import auth.DatabaseConnection;
 import game.Game;
@@ -81,7 +82,7 @@ public class GameController implements Observer {
     private transient List<Circle> removedCircles;
     private transient List<String> levels;
     private transient int level = 0;
-    private transient ScoreCalculator scoreCalculator = new ScoreCalculator(Main.player, 0);
+    private transient ScoreCalculator scoreCalculator;
 
     private transient Circle current;
     private transient Circle next;

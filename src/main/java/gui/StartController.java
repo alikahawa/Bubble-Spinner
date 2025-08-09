@@ -1,4 +1,5 @@
 package gui;
+import gui.SceneLoader;
 
 import auth.DatabaseConnection;
 import auth.Player;
@@ -21,13 +22,13 @@ import javafx.stage.Window;
  */
 public class StartController {
     @FXML
-    private transient PasswordField password;
+    private transient PasswordField passwordField;
     @FXML
-    private transient TextField username;
+    private transient TextField usernameField;
     @FXML
-    private transient Button logIn;
+    private transient Button loginButton;
     @FXML
-    private transient Button exit;
+    private transient Button exitButton;
 
     /**
      *  Method that handles input when login button is pressed.
@@ -39,29 +40,38 @@ public class StartController {
         if (event.getEventType().toString().equals("MOUSE_CLICKED"))  {
             return;
         }
-        if (username.getText().isEmpty()) {
-            Window window = logIn.getScene().getWindow();
+        if (usernameField.getText().isEmpty()) {
+            Window window = loginButton.getScene().getWindow();
             alertPopUp(Alert.AlertType.ERROR, window, "Form Error!",
                     "Please enter your username");
             return;
         }
-        if (password.getText().isEmpty()) {
-            Window window = logIn.getScene().getWindow();
+        if (passwordField.getText().isEmpty()) {
+            Window window = loginButton.getScene().getWindow();
             alertPopUp(Alert.AlertType.ERROR, window, "Form Error!",
                     "Please enter a password");
             return;
         }
-        if (DatabaseConnection.authentication(username.getText(),password.getText())) {
-            System.out.println("SUCCESS");
+        
+        try {
+            if (DatabaseConnection.authentication(usernameField.getText(), passwordField.getText())) {
+                System.out.println("SUCCESS");
 
-            Player player = new Player(username.getText(),password.getText(),username.getText());
-            Main.player = player;
-            SceneLoader.loadScene("/mainScreen.fxml");
-            return;
-        } else {
-            Window window = logIn.getScene().getWindow();
-            alertPopUp(Alert.AlertType.ERROR, window, "Form Error!",
-                    "Wrong Credentials");
+                Player player = new Player(usernameField.getText(), passwordField.getText(), usernameField.getText());
+                Main.player = player;
+                SceneLoader.loadScene("/mainScreenModern.fxml");
+                return;
+            } else {
+                Window window = loginButton.getScene().getWindow();
+                alertPopUp(Alert.AlertType.ERROR, window, "Login Error!",
+                        "Invalid username or password. Please check your credentials and try again.");
+                return;
+            }
+        } catch (Exception e) {
+            // Database connection failed - offer fallback options
+            Window window = loginButton.getScene().getWindow();
+            alertPopUp(Alert.AlertType.WARNING, window, "Connection Error!",
+                    "Cannot connect to database. Please check your internet connection or play as guest.");
             return;
         }
 
@@ -78,7 +88,30 @@ public class StartController {
      */
     @FXML
     protected void handleExitButtonAction(ActionEvent event) {
-        ((Stage)exit.getScene().getWindow()).close();
+        ((Stage)exitButton.getScene().getWindow()).close();
+    }
+
+    /**
+     * Handler for creating a new account.
+     *
+     * @param event information about the button that called the method.
+     */
+    @FXML
+    protected void handleCreateAccountAction(ActionEvent event) {
+        SceneLoader.loadScene("/registrationScreen.fxml");
+    }
+
+    /**
+     * Handler for guest login.
+     *
+     * @param event information about the button that called the method.
+     */
+    @FXML
+    protected void handleGuestLoginAction(ActionEvent event) {
+        // Create a guest player
+        Player guestPlayer = new Player("Guest", "", "Guest");
+        Main.player = guestPlayer;
+        SceneLoader.loadScene("/mainScreenModern.fxml");
     }
 
     /**

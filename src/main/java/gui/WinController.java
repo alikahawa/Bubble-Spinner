@@ -1,5 +1,6 @@
 package gui;
 
+import gui.SceneLoader;
 import game.ScoreCalculator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,11 +16,17 @@ public class WinController {
     private transient Text score;
 
     private transient int level;
-    private transient ScoreCalculator scoreCalculator = new ScoreCalculator(Main.player, 0);
+    private transient ScoreCalculator scoreCalculator;
 
     @FXML
     public void initialize() {
-        score.setText("Your score: " + scoreCalculator.getScore());
+        // Initialize scoreCalculator with current player when needed
+        if (scoreCalculator == null && Main.player != null) {
+            scoreCalculator = new ScoreCalculator(Main.player, 0);
+        }
+        if (scoreCalculator != null) {
+            score.setText("Your score: " + scoreCalculator.getScore());
+        }
     }
 
     /**
