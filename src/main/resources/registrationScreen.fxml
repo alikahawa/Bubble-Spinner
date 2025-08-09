@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Registration Screen for Bubble-Spinner Game
+  
+  This FXML file defines the user registration interface.
+  
+  Author: Ali Kahawati (Enhancement Update)
+  Date: August 2025
+  Version: 2.0
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1" 
+           xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="gui.RegistrationController"
+           styleClass="main-screen">
+    
+    <AnchorPane styleClass="main-window">
+        
+        <!-- Registration Card Container -->
+        <VBox alignment="CENTER" spacing="32" styleClass="card-elevated"
+              AnchorPane.topAnchor="60" AnchorPane.bottomAnchor="60"
+              AnchorPane.leftAnchor="120" AnchorPane.rightAnchor="120"
+              minWidth="400" maxWidth="550">
+            
+            <!-- Header Section -->
+            <VBox alignment="CENTER" spacing="16">
+                
+                <!-- Registration Title -->
+                <Label text="CREATE ACCOUNT" styleClass="title-large">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                
+                <Label text="Join the Bubble Spinner Community!" styleClass="title-medium">
+                    <font>
+                        <Font name="System" size="16.0" />
+                    </font>
+                </Label>
+                
+            </VBox>
+            
+            <!-- Registration Form -->
+            <VBox spacing="20" alignment="CENTER" maxWidth="360">
+                
+                <!-- Username Field -->
+                <VBox spacing="8">
+                    <Label text="USERNAME" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="usernameField" 
+                               promptText="Choose a unique username"
+                               styleClass="text-field"
+                               prefHeight="45"
+                               maxWidth="360">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextField>
+                </VBox>
+                
+                <!-- Nickname Field -->
+                <VBox spacing="8">
+                    <Label text="DISPLAY NAME" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="nicknameField" 
+                               promptText="Your display name"
+                               styleClass="text-field"
+                               prefHeight="45"
+                               maxWidth="360">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextField>
+                </VBox>
+                
+                <!-- Password Field -->
+                <VBox spacing="8">
+                    <Label text="PASSWORD" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <PasswordField fx:id="passwordField" 
+                                   promptText="Create a secure password"
+                                   styleClass="password-field"
+                                   prefHeight="45"
+                                   maxWidth="360">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </PasswordField>
+                </VBox>
+                
+                <!-- Confirm Password Field -->
+                <VBox spacing="8">
+                    <Label text="CONFIRM PASSWORD" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <PasswordField fx:id="confirmPasswordField" 
+                                   promptText="Confirm your password"
+                                   styleClass="password-field"
+                                   prefHeight="45"
+                                   maxWidth="360">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </PasswordField>
+                </VBox>
+                
+                <!-- Action Buttons -->
+                <VBox alignment="CENTER" spacing="16">
+                    
+                    <!-- Register Button -->
+                    <Button fx:id="registerButton" 
+                            text="CREATE ACCOUNT" 
+                            styleClass="btn-primary, scale-on-hover"
+                            onAction="#handleRegisterButtonAction"
+                            prefWidth="200" 
+                            prefHeight="50">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Button>
+                    
+                    <!-- Back to Login Button -->
+                    <Button text="Back to Login" 
+                            styleClass="btn-outline"
+                            onAction="#handleBackToLoginAction"
+                            prefWidth="150" 
+                            prefHeight="35">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Button>
+                    
+                </VBox>
+                
+            </VBox>
+            
+        </VBox>
+        
+        <!-- Close Button -->
+        <Button fx:id="closeButton" 
+                text="✕" 
+                styleClass="btn-small"
+                onAction="#handleCloseButtonAction" 
+                prefWidth="40" 
+                prefHeight="40"
+                AnchorPane.topAnchor="16" 
+                AnchorPane.rightAnchor="16">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Button>
+        
+        <!-- App Version -->
+        <Label text="Bubble Spinner v2.0 - Registration" 
+               styleClass="caption-text"
+               AnchorPane.bottomAnchor="16" 
+               AnchorPane.leftAnchor="16">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Label>
+        
+    </AnchorPane>
+    
+</StackPane>

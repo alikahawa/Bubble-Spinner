@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Modern Scoreboard Screen for Bubble-Spinner Game
+  
+  This FXML file defines the modernized scoreboard interface with improved
+  table design, better data presentation, and professional styling.
+  
+  Author: Ali Kahawati (Modernization Update)
+  Date: August 2025
+  Version: 2.0
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="gui.ScoreboardController"
+            styleClass="main-screen">
+    
+    <!-- Header Section -->
+    <top>
+        <VBox spacing="16" styleClass="content-container">
+            <padding>
+                <Insets top="24" right="32" bottom="16" left="32" />
+            </padding>
+            
+            <!-- Page Title -->
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <Label text="🏆" styleClass="title-large">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                </Label>
+                <VBox>
+                    <Label text="LEADERBOARD" styleClass="title-large">
+                        <font>
+                            <Font name="System Bold" size="28.0" />
+                        </font>
+                    </Label>
+                    <Label text="Top players and high scores" styleClass="body-text">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                </VBox>
+            </HBox>
+            
+            <!-- Filter and Sort Controls -->
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <Label text="Filter:" styleClass="caption-text">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                
+                <ComboBox fx:id="filterComboBox" 
+                          promptText="All Time"
+                          prefWidth="120">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="All Time" />
+                            <String fx:value="This Week" />
+                            <String fx:value="This Month" />
+                            <String fx:value="Today" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                
+                <Region HBox.hgrow="ALWAYS" />
+                
+                <!-- Refresh Button -->
+                <Button fx:id="refreshButton" 
+                        text="🔄 Refresh" 
+                        styleClass="btn-outline"
+                        onAction="#handleRefreshAction"
+                        prefHeight="35">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Button>
+                
+            </HBox>
+            
+        </VBox>
+    </top>
+    
+    <!-- Main Content - Scoreboard Table -->
+    <center>
+        <VBox spacing="16" styleClass="content-container">
+            <padding>
+                <Insets top="0" right="32" bottom="16" left="32" />
+            </padding>
+            
+            <!-- Statistics Cards -->
+            <HBox alignment="CENTER" spacing="20">
+                
+                <!-- Total Players Card -->
+                <VBox alignment="CENTER" spacing="8" styleClass="card" 
+                      prefWidth="150" prefHeight="80">
+                    <Label text="TOTAL PLAYERS" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="10.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="totalPlayersLabel" text="0" styleClass="title-medium">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                
+                <!-- Highest Score Card -->
+                <VBox alignment="CENTER" spacing="8" styleClass="card" 
+                      prefWidth="150" prefHeight="80">
+                    <Label text="HIGHEST SCORE" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="10.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="highestScoreLabel" text="0" styleClass="title-medium">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                
+                <!-- Average Score Card -->
+                <VBox alignment="CENTER" spacing="8" styleClass="card" 
+                      prefWidth="150" prefHeight="80">
+                    <Label text="AVERAGE SCORE" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="10.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="averageScoreLabel" text="0" styleClass="title-medium">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+                </VBox>
+                
+            </HBox>
+            
+            <!-- Scoreboard Table -->
+            <TableView fx:id="scoreboardTable" styleClass="table-view">
+                
+                <columns>
+                    
+                    <!-- Rank Column -->
+                    <TableColumn text="RANK" prefWidth="80" sortable="false">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="rank" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    
+                    <!-- Player Name Column -->
+                    <TableColumn text="PLAYER" prefWidth="200" sortable="true">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="userName" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    
+                    <!-- Score Column -->
+                    <TableColumn text="SCORE" prefWidth="120" sortable="true">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="score" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    
+                    <!-- Date Column -->
+                    <TableColumn text="DATE ACHIEVED" prefWidth="150" sortable="true">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="dateAchieved" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    
+                    <!-- Level Column -->
+                    <TableColumn text="LEVEL" prefWidth="100" sortable="true">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="level" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    
+                </columns>
+                
+                <!-- Table Styling -->
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
+                
+            </TableView>
+            
+            <!-- Your Rank Section -->
+            <VBox alignment="CENTER" spacing="8" styleClass="glass-panel">
+                <padding>
+                    <Insets top="16" right="20" bottom="16" left="20" />
+                </padding>
+                
+                <Label text="YOUR CURRENT RANKING" styleClass="caption-text">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                
+                <HBox alignment="CENTER" spacing="20">
+                    <VBox alignment="CENTER" spacing="4">
+                        <Label text="RANK" styleClass="caption-text">
+                            <font>
+                                <Font name="System Bold" size="10.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="playerRankLabel" text="--" styleClass="title-small">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                    
+                    <Separator orientation="VERTICAL" />
+                    
+                    <VBox alignment="CENTER" spacing="4">
+                        <Label text="BEST SCORE" styleClass="caption-text">
+                            <font>
+                                <Font name="System Bold" size="10.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="playerBestScoreLabel" text="--" styleClass="title-small">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                    
+                    <Separator orientation="VERTICAL" />
+                    
+                    <VBox alignment="CENTER" spacing="4">
+                        <Label text="GAMES PLAYED" styleClass="caption-text">
+                            <font>
+                                <Font name="System Bold" size="10.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="playerGamesLabel" text="--" styleClass="title-small">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                </HBox>
+                
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+    <!-- Bottom Navigation -->
+    <bottom>
+        <HBox alignment="CENTER" spacing="16" styleClass="game-controls">
+            <padding>
+                <Insets top="16" right="32" bottom="20" left="32" />
+            </padding>
+            
+            <!-- Back to Main Menu -->
+            <Button fx:id="menuButton" 
+                    text="🏠 MAIN MENU" 
+                    styleClass="btn-primary"
+                    onAction="#handleMenuButton" 
+                    prefWidth="140" 
+                    prefHeight="45">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Button>
+            
+            <!-- Play Again Button -->
+            <Button fx:id="playAgainButton" 
+                    text="🎮 PLAY AGAIN" 
+                    styleClass="btn-secondary"
+                    onAction="#handlePlayAgainAction" 
+                    prefWidth="140" 
+                    prefHeight="45">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Button>
+            
+        </HBox>
+    </bottom>
+    
+</BorderPane>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Modern Start Screen (Login) for Bubble-Spinner Game
+  
+  This FXML file defines the modernized login interface with improved
+  visual design, better user experience, and professional styling.
+  
+  Author: Ali Kahawati (Modernization Update)
+  Date: August 2025
+  Version: 2.0
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1" 
+           xmlns:fx="http://javafx.com/fxml/1" 
+           fx:controller="gui.StartController"
+           styleClass="main-screen">
+    
+    <AnchorPane styleClass="main-window">
+        
+        <!-- Login Card Container -->
+        <VBox alignment="CENTER" spacing="32" styleClass="card-elevated"
+              AnchorPane.topAnchor="80" AnchorPane.bottomAnchor="80"
+              AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150"
+              minWidth="400" maxWidth="500">
+            
+            <!-- Header Section -->
+            <VBox alignment="CENTER" spacing="16">
+                
+                <!-- Game Logo/Title -->
+                <Label text="BUBBLE SPINNER" styleClass="title-large">
+                    <font>
+                        <Font name="System Bold" size="32.0" />
+                    </font>
+                </Label>
+                
+                <Label text="Welcome Back!" styleClass="title-medium">
+                    <font>
+                        <Font name="System" size="18.0" />
+                    </font>
+                </Label>
+                
+                <Label text="Please sign in to continue" styleClass="body-text">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                
+            </VBox>
+            
+            <!-- Login Form -->
+            <VBox spacing="20" alignment="CENTER" maxWidth="320">
+                
+                <!-- Username Field -->
+                <VBox spacing="8">
+                    <Label text="USERNAME" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="usernameField" 
+                               promptText="Enter your username"
+                               styleClass="text-field"
+                               prefHeight="45"
+                               maxWidth="320">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextField>
+                </VBox>
+                
+                <!-- Password Field -->
+                <VBox spacing="8">
+                    <Label text="PASSWORD" styleClass="caption-text">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <PasswordField fx:id="passwordField" 
+                                   promptText="Enter your password"
+                                   styleClass="password-field"
+                                   prefHeight="45"
+                                   maxWidth="320">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </PasswordField>
+                </VBox>
+                
+                <!-- Login Button -->
+                <Button fx:id="loginButton" 
+                        text="SIGN IN" 
+                        styleClass="btn-primary, scale-on-hover"
+                        onAction="#handleLoginButtonAction"
+                        prefWidth="200" 
+                        prefHeight="50">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Button>
+                
+                <!-- Alternative Actions -->
+                <VBox alignment="CENTER" spacing="12">
+                    
+                    <Separator maxWidth="200" />
+                    
+                    <HBox alignment="CENTER" spacing="8">
+                        <Label text="New to Bubble Spinner?" styleClass="caption-text">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                        <Button text="Create Account" 
+                                styleClass="btn-outline"
+                                onAction="#handleCreateAccountAction"
+                                prefHeight="30">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                    </HBox>
+                    
+                    <Button text="Play as Guest" 
+                            styleClass="btn-outline"
+                            onAction="#handleGuestLoginAction"
+                            prefWidth="150" 
+                            prefHeight="35">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Button>
+                    
+                </VBox>
+                
+            </VBox>
+            
+            <!-- Footer Information -->
+            <VBox alignment="CENTER" spacing="8">
+                <Label text="🎮 Enjoy the ultimate bubble shooting experience!" 
+                       styleClass="caption-text" 
+                       textAlignment="CENTER">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Label>
+            </VBox>
+            
+        </VBox>
+        
+        <!-- Exit Button -->
+        <Button fx:id="exitButton" 
+                text="✕" 
+                styleClass="btn-small"
+                onAction="#handleExitButtonAction" 
+                prefWidth="40" 
+                prefHeight="40"
+                AnchorPane.topAnchor="16" 
+                AnchorPane.rightAnchor="16">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Button>
+        
+        <!-- App Version -->
+        <Label text="Bubble Spinner v2.0 - Professional Edition" 
+               styleClass="caption-text"
+               AnchorPane.bottomAnchor="16" 
+               AnchorPane.leftAnchor="16">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Label>
+        
+        <!-- Copyright -->
+        <Label text="© 2025 Team SEM-13" 
+               styleClass="caption-text"
+               AnchorPane.bottomAnchor="16" 
+               AnchorPane.rightAnchor="16">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Label>
+        
+    </AnchorPane>
+    
+</StackPane>

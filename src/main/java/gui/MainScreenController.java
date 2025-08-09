@@ -1,4 +1,5 @@
 package gui;
+import gui.SceneLoader;
 
 import game.ScoreCalculator;
 import grid.bubble.Bubble;
@@ -9,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -19,13 +21,28 @@ import javafx.stage.Stage;
  */
 public class MainScreenController {
     @FXML
-    private transient Bubble tutorial;
+    private transient Button profileButton;
     @FXML
-    private transient Button profilePage;
+    private transient Button exitButton;
     @FXML
-    private transient Button exit;
+    private transient Button playButton;
     @FXML
-    private transient Button play;
+    private transient Button tutorialButton;
+    @FXML
+    private transient Button scoreboardButton;
+    @FXML
+    private transient Label playerNameLabel;
+
+    /**
+     * Method called when the screen is initialized.
+     * Sets up the player name display.
+     */
+    @FXML
+    public void initialize() {
+        if (Main.player != null) {
+            playerNameLabel.setText(Main.player.getUsername());
+        }
+    }
 
     /**
      * Handler when clicked on exit button.
@@ -34,7 +51,7 @@ public class MainScreenController {
      */
     @FXML
     protected void handleExitButtonAction(ActionEvent event) {
-        ((Stage) exit.getScene().getWindow()).close();
+        ((Stage) exitButton.getScene().getWindow()).close();
     }
 
     /**
@@ -64,7 +81,7 @@ public class MainScreenController {
      */
     @FXML
     protected void handleScoreboardButtonAction(ActionEvent event) {
-        SceneLoader.loadScene("/scoreboardScreen.fxml");
+        SceneLoader.loadScene("/scoreboardScreenModern.fxml");
     }
 
     /**
@@ -88,11 +105,14 @@ public class MainScreenController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == easy) {
-            SceneLoader.loadSceneGame("/gameScreen.fxml", 0, new ScoreCalculator(Main.player, 0));
+            SceneLoader.loadSceneGame("/gameScreenModern.fxml", 0, 
+                    new ScoreCalculator(Main.player, 0));
         } else if (result.isPresent() && result.get() == normal) {
-            SceneLoader.loadSceneGame("/gameScreen.fxml", 3, new ScoreCalculator(Main.player, 0));
+            SceneLoader.loadSceneGame("/gameScreenModern.fxml", 3, 
+                    new ScoreCalculator(Main.player, 0));
         } else if (result.isPresent() && result.get() == hard) {
-            SceneLoader.loadSceneGame("/gameScreen.fxml", 6, new ScoreCalculator(Main.player, 0));
+            SceneLoader.loadSceneGame("/gameScreenModern.fxml", 6, 
+                    new ScoreCalculator(Main.player, 0));
         } else {
             alert.close();
         }
